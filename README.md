@@ -9,6 +9,27 @@ The goal is to keep the system clean, customizable, and easy to switch between s
 
 ---
 
+# **Table of Contents (Compact)**
+
+1. [Overview](#components-overview)
+2. [Arch Installation](#manual-installation-details)
+3. [AUR Helper](#aur-helper-installation)
+4. [Niri Setup](#niri-setup-guide)
+5. [Noctalia-Shell](#noctalia-shell-install--setup-guide)
+6. [Papirus Icon Theme](#papirus-icon-theme-guide)
+7. [Wayland Fonts](#wayland-font-setup-guide-nirihyprland)
+8. [OBS Studio](#obs-studio-install-guide-wayland)
+9. [Launchers](#walker-launcher-install-guide)
+10. [Spicetify](#spicetify-setup-guide)
+11. [Polkit & Drive Access](#polkit-fix--secondary-drive-access)
+12. [Spotify Scaling](#adjust-spotify-scaling-on-linux)
+13. [Hyprland Monitor Setup](#hyprland-monitor-resolution-guide)
+14. [LazyVim](#lazyvim-install-guide)
+15. [Essential Apps](#essential-apps-my-apps)
+16. [Setup Complete](#setup-complete)
+
+---
+
 ## **Components Overview**
 
 [Niri](https://github.com/YaLTeR/niri):
