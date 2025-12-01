@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirvic Arch Guide</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --sidebar-bg: #111111;
+            --sidebar-width: 280px;
+            --content-max-width: 900px;
+            --link-color: #4da6ff;
+            --border-color: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--sidebar-bg);
+            padding: 2rem 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+        }
+        
+        .sidebar-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .sidebar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .sidebar-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+        }
+        
+        .nav-links {
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: opacity 0.2s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .nav-section {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem 3rem;
+            max-width: var(--content-max-width);
+        }
+        
+        .content-section {
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        a {
+            color: var(--link-color);
+        }
+        
+        code {
+            background-color: #1a1a1a;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        pre {
+            background-color: #1a1a1a;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        blockquote {
+            border-left: 3px solid var(--border-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            opacity: 0.9;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            font-weight: 600;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 1.5rem;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-title">Nirvic Arch Guide</div>
+            <div class="sidebar-subtitle">A clean, minimal Arch Linux setup guide</div>
+        </div>
+        
+        <ul class="nav-links">
+            <div class="nav-section">Introduction</div>
+            <li><a href="#overview">Overview</a></li>
+            
+            <div class="nav-section">Installation</div>
+            <li><a href="#manual-installation">Manual Installation</a></li>
+            <li><a href="#aur-helper">AUR Helper</a></li>
+            
+            <div class="nav-section">Core Components</div>
+            <li><a href="#niri-setup">Niri Setup</a></li>
+            <li><a href="#noctalia-shell">Noctalia-Shell</a></li>
+            <li><a href="#papirus-icons">Papirus Icon Theme</a></li>
+            <li><a href="#wayland-fonts">Wayland Fonts</a></li>
+            
+            <div class="nav-section">Applications</div>
+            <li><a href="#obs-studio">OBS Studio</a></li>
+            <li><a href="#launchers">Launchers</a></li>
+            <li><a href="#spicetify">Spicetify</a></li>
+            <li><a href="#essential-apps">Essential Apps</a></li>
+            
+            <div class="nav-section">Configuration</div>
+            <li><a href="#polkit-fix">Polkit & Drive Access</a></li>
+            <li><a href="#spotify-scaling">Spotify Scaling</a></li>
+            <li><a href="#hyprland-monitor">Hyprland Monitor</a></li>
+            <li><a href="#lazyvim">LazyVim</a></li>
+            
+            <div class="nav-section">Conclusion</div>
+            <li><a href="#setup-complete">Setup Complete</a></li>
+        </ul>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Nirvic Arch Guide</h1>
+        
+        <div class="content-section">
+            <p>This guide explains how I install Arch Linux for my daily system. The setup is fully manual for now because I have not finished building my complete dotfiles. I prefer keeping everything manual at this stage so the system stays clean, simple, and easy to adjust later.</p>
+            
+            <p>I also maintain a minimal dotfiles setup called <strong>niriha</strong>, which is a lightweight configuration used as a temporary environment or a starting point before switching to the full Nirvic setup.</p>
+            
+            <p>This guide covers how I prepare and configure my Arch system for <strong>Niri</strong>, <strong>Hyprland</strong>, and my overall workflow. I use different styles depending on what I need at the moment, including layout choices, theming, fonts, window manager behavior, and the general structure of the system.</p>
+            
+            <p>The goal is to keep the system clean, customizable, and easy to switch between setups.</p>
+        </div>
+        
+        <h2 id="overview">Components Overview</h2>
+        <div class="content-section">
+            <p><a href="https://github.com/YaLTeR/niri">Niri</a>: A modern Wayland compositor focused on a clean tiling experience, smooth animations, and a minimal configuration style. It is stable, lightweight, and optimized for daily workflows.</p>
+            
+            <p><a href="https://github.com/noctalia-dev/vicinae">Vicinae</a>: A fast, elegant application launcher designed for Noctalia environments. It integrates with Wayland compositors and provides a clean, minimal interface for launching apps.</p>
+            
+            <p><a href="https://github.com/noctalia-dev/noctalia-shell">Noctalia-Shell</a>: A highly customizable Wayland shell that manages UI elements, panels, widgets, and theming. It is designed to work seamlessly with Niri and other Wayland compositors for a smooth, aesthetic desktop experience.</p>
+        </div>
+        
+        <h2 id="manual-installation">Manual Installation Details</h2>
+        <div class="content-section">
+            <p>You can install Arch Linux manually using the vanilla Arch ISO and the built-in <code>archinstall</code> script.</p>
+            
+            <h3>Steps:</h3>
+            <ol>
+                <li>Download the Arch Linux ISO: <a href="https://archlinux.org/download/">https://archlinux.org/download/</a></li>
+                <li>Write it to a USB stick (use <strong>balenaEtcher</strong> on macOS/Windows)</li>
+                <li>Boot from the USB (disable <strong>Secure Boot</strong> in BIOS)</li>
+                <li>For Wi-Fi:
+                    <pre><code>iwctl
+station wlan0 scan
+station wlan0 connect &lt;your network&gt;</code></pre>
+                    Ethernet works automatically.
+                </li>
+                <li>Run <code>archinstall</code> and follow the configuration table below:</li>
+            </ol>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Section</th>
+                        <th>Configuration Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mirrors and repositories</td>
+                        <td>Select regions → your country</td>
+                    </tr>
+                    <tr>
+                        <td>Disk configuration</td>
+                        <td><strong>Option 1:</strong> Use entire disk → erases all data<br><strong>Option 2:</strong> Use existing partition → overwrites selected partition</td>
+                    </tr>
+                    <tr>
+                        <td>Disk → File system</td>
+                        <td>btrfs (default structure + compression) or ext4 (no separate partitioning needed)</td>
+                    </tr>
+                    <tr>
+                        <td>Disk → Disk encryption</td>
+                        <td>No encryption, or LUKS + password + select partitions</td>
+                    </tr>
+                    <tr>
+                        <td>Hostname</td>
+                        <td>Choose your system name</td>
+                    </tr>
+                    <tr>
+                        <td>Bootloader</td>
+                        <td>systemd-boot / GRUB / Limine</td>
+                    </tr>
+                    <tr>
+                        <td>Authentication → Root password</td>
+                        <td>Set your root password</td>
+                    </tr>
+                    <tr>
+                        <td>Authentication → User account</td>
+                        <td>Add a user → grant superuser access → confirm</td>
+                    </tr>
+                    <tr>
+                        <td>Applications → Audio</td>
+                        <td>pipewire</td>
+                    </tr>
+                    <tr>
+                        <td>Network configuration</td>
+                        <td>Copy ISO network configuration</td>
+                    </tr>
+                    <tr>
+                        <td>Timezone</td>
+                        <td>Set your location</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p>After installation:</p>
+            <ul>
+                <li>Reboot the system</li>
+                <li>Log in using the user you created</li>
+            </ul>
+        </div>
+        
+        <h2 id="aur-helper">AUR Helper Installation</h2>
+        <div class="content-section">
+            <p>AUR helpers like <strong>yay</strong> and <strong>paru</strong> let you easily install and manage packages from the <strong>Arch User Repository (AUR)</strong>, including handling dependencies and updates.</p>
+            
+            <h3>Install yay</h3>
+            <pre><code>sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+# Usage
+yay -S &lt;package&gt;   # install
+yay -Syu           # update</code></pre>
+            
+            <h3>Install paru</h3>
+            <pre><code>sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+
+# Usage
+paru -S &lt;package&gt;  # install
+paru -Syu          # update</code></pre>
+            
+            <blockquote>⚠️ <strong>Warning:</strong> No need to install both AUR helpers.</blockquote>
+        </div>
+        
+        <h2 id="niri-setup">Niri Setup Guide</h2>
+        <div class="content-section">
+            <p>This guide explains how to set up Niri as your daily driver on Arch-based systems. It includes installing Niri, essential applications, a launcher, and configuring auto-startup apps.</p>
+            
+            <h3>1. Access TTY</h3>
+            <p>After booting, you will get a TTY prompt.</p>
+            <ol>
+                <li>Enter your root username.</li>
+                <li>Enter your root password.</li>
+                <li>You will now be at a clean <code>tty1</code>.</li>
+            </ol>
+            <p>This is where you will start the installation process.</p>
+            
+            <h3>2. Install Niri</h3>
+            <p>You can install Niri using one of the following commands:</p>
+            <pre><code>sudo pacman -S niri-git
+# or
+sudo pacman -S niri</code></pre>
+            <p>This will install the Niri compositor, which we will use as the foundation for our setup.</p>
+            
+            <h3>3. Install Daily Applications</h3>
+            <p>Here are the applications I install and use daily:</p>
+            <pre><code>yay -S kitty fuzzzel swaybg otf-font-awesome ttf-jetbrains-mono xwayland-satellite</code></pre>
+            <ul>
+                <li><strong>kitty</strong>: Terminal emulator</li>
+                <li><strong>fuzzzel</strong>: Tool I use (replace with your preferred tool)</li>
+                <li><strong>swaybg</strong>: Background manager for Wayland</li>
+                <li><strong>otf-font-awesome / ttf-jetbrains-mono</strong>: Fonts for UI and coding</li>
+                <li><strong>xwayland-satellite</strong>: Wayland/X11 compatibility</li>
+            </ul>
+            
+            <h3>4. Install and Enable SDDM</h3>
+            <p>SDDM is a display manager. Install it:</p>
+            <pre><code>yay -S sddm</code></pre>
+            <p>Enable SDDM so it starts automatically:</p>
+            <pre><code>sudo systemctl enable sddm --now</code></pre>
+            <p>After this, SDDM will open. Enter your password, and then log in to Niri.</p>
+            
+            <h3>5. Configure Display in Niri</h3>
+            <p>Once inside Niri, configure your display resolution in <code>config.kdl</code>. Example for a 1920x1080 monitor at 320Hz:</p>
+            <pre><code>output "DP-1" {
+    mode "1920x1080@319.998"
+    scale 1
+}</code></pre>
+            <ul>
+                <li>Replace <code>"DP-1"</code> with your output name (use <code>wlr-randr</code> or <code>swaymsg -t get_outputs</code> to find it).</li>
+                <li>Replace <code>1920x1080@319.998</code> with your own resolution and refresh rate.</li>
+            </ul>
+            
+            <h3>6. Add Auto-Startup Applications</h3>
+            <p>You can configure Niri to automatically start applications when it launches:</p>
+            <pre><code>spawn-at-startup "elephant"
+spawn-at-startup "waybar"
+spawn-at-startup "mako"</code></pre>
+            <ul>
+                <li><strong>elephant</strong>: Example app (replace with what you need)</li>
+                <li><strong>waybar</strong>: Status bar for Wayland</li>
+                <li><strong>mako</strong>: Notification daemon</li>
+            </ul>
+            <p>Add any other applications you want to start automatically.</p>
+            
+            <h3>7. Install More Daily Applications</h3>
+            <p>Here are other applications I use daily:</p>
+            <pre><code>yay -S spotify-launcher zed vesktop-bin neovim firefox obs-studio</code></pre>
+            <ul>
+                <li><strong>spotify-launcher</strong>: Spotify client</li>
+                <li><strong>zed</strong>: Editor</li>
+                <li><strong>vesktop-bin</strong>: Virtual desktop manager</li>
+                <li><strong>neovim</strong>: Text editor</li>
+                <li><strong>firefox</strong>: Browser</li>
+                <li><strong>obs-studio</strong>: Screen recording/streaming</li>
+            </ul>
+            
+            <h3>8. Install a Launcher</h3>
+            <p>I use <strong>Vicinae</strong> as my launcher. Install it using:</p>
+            <pre><code>yay -S vicinae-bin
+# or
+curl -fsSL https://vicinae.com/install.sh | bash</code></pre>
+            
+            <h3>9. Niri Configuration for Vicinae</h3>
+            <p>To make Vicinae start automatically and work properly with Niri, add the following to <code>~/.config/niri/config.kdl</code>:</p>
+            <pre><code>spawn-sh-at-startup "vicinae server"
+
+# Shortcut to toggle Vicinae
+Mod+Space repeat=false { spawn "vicinae" "toggle"; }</code></pre>
+            <ul>
+                <li><code>spawn-sh-at-startup "vicinae server"</code>: Starts the launcher server automatically</li>
+                <li><code>Mod+Space</code>: Keybinding to toggle the launcher</li>
+            </ul>
+            <p>Refer to Vicinae documentation for more customization options.</p>
+        </div>
+        
+        <h2 id="noctalia-shell">Noctalia-Shell Install & Setup Guide</h2>
+        <div class="content-section">
+            <h3>1. Install Noctalia-Shell</h3>
+            <pre><code>yay -S noctalia-shell-git</code></pre>
+            
+            <h3>2. Enable and Start Service</h3>
+            <pre><code>systemctl --user enable --now noctalia.service</code></pre>
+            
+            <h3>3. Verify Service</h3>
+            <pre><code>systemctl --user status noctalia.service</code></pre>
+            
+            <h3>4. Configure Noctalia-Shell</h3>
+            <pre><code>cp -r /etc/noctalia-shell ~/.config/noctalia-shell</code></pre>
+            <p>Edit <code>~/.config/noctalia-shell/config.kdl</code> to set display, keybindings, and startup apps:</p>
+            <pre><code>spawn-at-startup "waybar"
+spawn-at-startup "mako"
+spawn-at-startup "kitty"</code></pre>
+        </div>
+        
+        <h2 id="papirus-icons">Papirus Icon Theme Guide</h2>
+        <div class="content-section">
+            <p>This guide explains how to <strong>install, apply, customize colors, and uninstall</strong> the Papirus Icon Theme.</p>
+            
+            <h3>1. Install Papirus Icon Theme</h3>
+            <p>Use <code>yay</code> to install:</p>
+            <pre><code>yay -S papirus-icon-theme</code></pre>
+            
+            <h3>2. Apply the Theme</h3>
+            <ul>
+                <li>Open your <strong>desktop environment's appearance/settings</strong>.</li>
+                <li>Go to <strong>Icons</strong> and select <strong>Papirus</strong>.</li>
+            </ul>
+            <p>Optional: Choose <strong>Papirus Dark</strong> or <strong>Papirus Light</strong> variants.</p>
+            
+            <h3>3. Customize Folder Colors</h3>
+            <p>Install the <strong>Papirus folder color script</strong>:</p>
+            <pre><code>wget -qO- https://git.io/papirus-folders-install | env PREFIX=/usr/local sh</code></pre>
+            <p>Change folder colors for a theme:</p>
+            <pre><code>papirus-folders -C &lt;color&gt; --theme Papirus-Dark</code></pre>
+            <ul>
+                <li>Replace <code>&lt;color&gt;</code> with your preferred color name (e.g., blue, red, orange).</li>
+                <li>Replace <code>Papirus-Dark</code> with <code>Papirus-Light</code> if you use the light theme.</li>
+            </ul>
+            
+            <h3>4. Uninstall Folder Color Script</h3>
+            <p>To uninstall the folder color script:</p>
+            <pre><code>wget -qO- https://git.io/papirus-folders-install | env uninstall=true sh</code></pre>
+        </div>
+        
+        <h2 id="wayland-fonts">Wayland Font Setup Guide (Niri/Hyprland)</h2>
+        <div class="content-section">
+            <h3>1. Install Recommended Fonts</h3>
+            <pre><code>sudo pacman -S noto-fonts noto-fonts-emoji noto-fonts-extra
+sudo pacman -S ttf-liberation ttf-roboto ttf-jetbrains-mono ttf-fira-code ttf-hack
+yay -S ttf-symbola  # from AUR</code></pre>
+            
+            <h3>2. Optional: Remove Default Fonts</h3>
+            <p>If your native language fonts look bad:</p>
+            <pre><code>yay -Rns ttf-dejavu gnu-free-font</code></pre>
+            
+            <h3>3. Refresh Font Cache</h3>
+            <pre><code>fc-cache -fv</code></pre>
+            
+            <h3>4. Reboot</h3>
+            <p>Reboot your system to enjoy better fonts in Wayland.</p>
+        </div>
+        
+        <h2 id="obs-studio">OBS Studio Install Guide (Wayland)</h2>
+        <div class="content-section">
+            <p>This guide installs <strong>OBS Studio</strong> for recording and streaming on Wayland setups (Niri/Hyprland) and configures <strong>PipeWire</strong> for proper screen capture.</p>
+            
+            <h3>1. Install OBS Studio</h3>
+            <p>Install OBS Studio from the AUR:</p>
+            <pre><code>yay -S obs-studio</code></pre>
+            <p>This provides the main application for recording and streaming.</p>
+            
+            <h3>2. Install PipeWire and Dependencies</h3>
+            <p>PipeWire handles screen capture on Wayland:</p>
+            <pre><code>sudo pacman -S pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-gnome</code></pre>
+            <ul>
+                <li><code>pipewire</code> – core service for audio/video routing.</li>
+                <li><code>wireplumber</code> – session manager for PipeWire.</li>
+                <li><code>xdg-desktop-portal</code> & <code>xdg-desktop-portal-gnome</code> – enable sandboxed apps to capture screens.</li>
+            </ul>
+            
+            <h3>3. Enable Required Services</h3>
+            <pre><code>systemctl --user enable --now pipewire
+systemctl --user enable --now wireplumber
+systemctl --user enable --now pipewire-pulse</code></pre>
+            <p>This ensures PipeWire and its services start automatically with your session.</p>
+            
+            <h3>4. Launch OBS</h3>
+            <pre><code>obs</code></pre>
+            <p>OBS Studio is now ready for screen recording and streaming on Wayland.</p>
+        </div>
+        
+        <h2 id="launchers">Walker Launcher Install Guide</h2>
+        <div class="content-section">
+            <blockquote><strong>Caution:</strong> You do not need this if you are installing <strong>Vicinae</strong>.</blockquote>
+            
+            <h3>What is Walker?</h3>
+            <p><a href="https://github.com/abenz1267/walker">Walker</a> is a lightweight, modular launcher for Linux. It integrates with <strong>Elephant</strong> applications for daily tasks, provides fast app launching, search functionality, and system utilities. It works well in Wayland compositors like Niri/Hyprland and is a minimal, efficient alternative to full-featured launchers.</p>
+            
+            <h3>Features Comparison</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Walker</th>
+                        <th>Vicinae</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lightweight, minimal, integrates with Elephant, modular launcher, fast app launching, simple Wayland support.</td>
+                        <td>More feature-rich, integrates with Vicinae ecosystem, full launcher features, extended UI, advanced Wayland support.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Installation Guide</h3>
+            <h4>1. Install Elephant Suite</h4>
+            <pre><code>yay -S elephant elephant-bluetooth elephant-calc elephant-clipboard \
+elephant-desktopapplications elephant-files elephant-menus elephant-providerlist \
+elephant-symbols elephant-todo elephant-unicode elephant-websearch</code></pre>
+            
+            <h4>2. Install Walker</h4>
+            <pre><code>yay -S walker</code></pre>
+            
+            <h3>Running Walker</h3>
+            <p>Start Elephant as a user service to run Walker:</p>
+            <pre><code>elephant service enable   # generates and enables systemd user service
+systemctl --user start elephant.service  # start without reboot</code></pre>
+            <p>Walker is now ready to use alongside Elephant applications.</p>
+        </div>
+        
+        <h2 id="spicetify">Spicetify Setup Guide</h2>
+        <div class="content-section">
+            <p>Spicetify is a <strong>command-line tool</strong> to customize the official Spotify client. It supports Windows, macOS, and Linux, allowing you to <strong>change colors, inject CSS, extensions, and custom apps</strong> to fully control the Spotify interface.</p>
+            
+            <h3>1. Install Spicetify</h3>
+            <pre><code>curl -fsSL https://raw.githubusercontent.com/spicetify/cli/main/install.sh | sh</code></pre>
+            
+            <h3>2. Apply Spicetify</h3>
+            <pre><code>spicetify backup apply</code></pre>
+            <blockquote>Backs up your current Spotify configuration and applies Spicetify safely.</blockquote>
+            
+            <h3>3. Fix <code>xpui.ini</code> Issues</h3>
+            <pre><code>find ~/.config/spotify -name prefs
+nano ~/.config/spicetify/config-xpui.ini</code></pre>
+            <p>Set:</p>
+            <pre><code>prefs_path = /home/rakhal/.config/spotify/prefs</code></pre>
+            <p>Then reapply:</p>
+            <pre><code>spicetify backup apply</code></pre>
+            
+            <h3>Notes</h3>
+            <ul>
+                <li>Run <code>spicetify backup apply</code> after changes.</li>
+                <li>Reapply if Spotify updates.</li>
+                <li>Works on Wayland compositors like <strong>Niri/Hyprland</strong>.</li>
+            </ul>
+            
+            <h3>Links</h3>
+            <ul>
+                <li><a href="https://spicetify.app/docs/getting-started">Official Docs</a></li>
+                <li><a href="https://spicetify.app/docs/getting-started#basic-usage">Basic Usage</a></li>
+            </ul>
+        </div>
+        
+        <h2 id="polkit-fix">Polkit Fix & Secondary Drive Access</h2>
+        <div class="content-section">
+            <p>This guide helps fix Polkit authentication issues on your system, ensuring all administrative prompts work correctly, and enables smooth mounting and access of secondary drives.</p>
+            
+            <h3>Install Polkit GNOME</h3>
+            <p>Install the required Polkit package:</p>
+            <pre><code>sudo pacman -S polkit-gnome</code></pre>
+            
+            <h3>Start Polkit Authentication Agent</h3>
+            <p>Manually start the Polkit agent to enable authentication prompts:</p>
+            <pre><code>/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &</code></pre>
+            
+            <h3>Enable Auto-start for Polkit</h3>
+            <p>Ensure Polkit runs automatically on login:</p>
+            <pre><code>mkdir -p ~/.config/autostart/
+nano ~/.config/autostart/polkit-gnome-authentication-agent-1.desktop</code></pre>
+            <p>Paste the following into the file:</p>
+            <pre><code>[Desktop Entry]
+Type=Application
+Exec=/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+Name=PolicyKit GNOME Authentication Agent
+Comment=Authentication agent for PolicyKit
+X-GNOME-Autostart-enabled=true</code></pre>
+            <p>Save and exit.</p>
+            <p>Polkit will now run automatically, allowing proper mounting and access of secondary drives.</p>
+        </div>
+        
+        <h2 id="spotify-scaling">Adjust Spotify Scaling on Linux</h2>
+        <div class="content-section">
+            <p>This guide helps fix scaling issues in Spotify by overriding the <code>.desktop</code> file. This method is recommended and does not require creating a wrapper script.</p>
+            
+            <h3>Desktop File Override (Recommended)</h3>
+            
+            <h4>Step 1: Copy the Spotify <code>.desktop</code> File</h4>
+            <p>Open a terminal and run:</p>
+            <pre><code>mkdir -p ~/.local/share/applications
+cp /usr/share/applications/spotify.desktop ~/.local/share/applications/spotify.desktop</code></pre>
+            <p>This copies the Spotify launcher to your <strong>local applications folder</strong>, so changes won't affect system-wide settings.</p>
+            
+            <h4>Step 2: Edit the Copied File</h4>
+            <p>Open the copied file in a text editor:</p>
+            <pre><code>nano ~/.local/share/applications/spotify.desktop</code></pre>
+            
+            <h4>Step 3: Modify the Exec Line</h4>
+            <p>Locate the line that starts with:</p>
+            <pre><code>Exec=spotify %U</code></pre>
+            <p>Change it to:</p>
+            <pre><code>Exec=env GDK_SCALE=1 GDK_DPI_SCALE=0.6667 spotify %U</code></pre>
+            <p>This sets the scaling for Spotify correctly.</p>
+            
+            <h4>Step 4: Save and Exit</h4>
+            <ul>
+                <li>Press <strong>Ctrl + O</strong> to save.</li>
+                <li>Press <strong>Enter</strong> to confirm.</li>
+                <li>Press <strong>Ctrl + X</strong> to exit.</li>
+            </ul>
+            
+            <h4>Step 5: Launch Spotify</h4>
+            <p>Now, any time you launch Spotify from your app launcher or menu, it will automatically use the correct scale. No wrapper script is needed.</p>
+        </div>
+        
+        <h2 id="hyprland-monitor">Hyprland Monitor Resolution Guide</h2>
+        <div class="content-section">
+            <blockquote><strong>⚠️ Warning:</strong> Do not follow these settings if you have your own Hyprland configuration. These are personal examples from an older setup and may not suit every system.</blockquote>
+            
+            <p>This guide explains how to configure monitor resolution and refresh rate in Hyprland.</p>
+            
+            <h3>Step 1: Update Your System</h3>
+            <p>Ensure your system is up to date:</p>
+            <pre><code>sudo pacman -Syu</code></pre>
+            
+            <h3>Step 2: Configure Monitor Resolution</h3>
+            <p>Open your monitor configuration file:</p>
+            <pre><code>nano ~/.config/hypr/monitors.conf</code></pre>
+            <p>Add or modify your monitor entry:</p>
+            <pre><code>monitor=DP-1,1920x1080@320,0x0,1</code></pre>
+            <ul>
+                <li><strong>DP-1</strong> – Replace with your monitor's identifier.</li>
+                <li><strong>1920x1080@320</strong> – Set the desired resolution and refresh rate.</li>
+                <li><strong>0x0</strong> – Position of the monitor on the screen.</li>
+                <li><strong>1</strong> – Enable the monitor.</li>
+            </ul>
+            <p>Save the file and exit.</p>
+            
+            <h3>Step 3: Optional – Adjust Window Decorations</h3>
+            <p>Edit the main Hyprland configuration:</p>
+            <pre><code>nano ~/.config/hypr/hyprland.conf</code></pre>
+            <p>Add or modify the decoration section:</p>
+            <pre><code>decoration {
+    rounding = 12
+}</code></pre>
+            <p>This sets rounded corners for windows, giving a smoother appearance.</p>
+            
+            <h3>Step 4: Apply Changes</h3>
+            <p>Reload Hyprland to apply your new settings:</p>
+            <pre><code>hyprctl reload</code></pre>
+            <p>Your monitor should now run with the correct resolution and refresh rate.</p>
+        </div>
+        
+        <h2 id="lazyvim">LazyVim Install Guide</h2>
+        <div class="content-section">
+            <h3>What is LazyVim</h3>
+            <p>LazyVim is a pre-configured Neovim setup using lazy.nvim, providing fast editing, lazy-loaded plugins, and sensible defaults.</p>
+            
+            <h3>Install</h3>
+            <p>Backup existing config:</p>
+            <pre><code>mv ~/.config/nvim{,.bak}
+mv ~/.local/share/nvim{,.bak}
+mv ~/.local/state/nvim{,.bak}
+mv ~/.cache/nvim{,.bak}</code></pre>
+            
+            <p>Clone LazyVim starter:</p>
+            <pre><code>git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git</code></pre>
+            
+            <p>Launch Neovim to install plugins:</p>
+            <pre><code>nvim</code></pre>
+            
+            <p>Check setup:</p>
+            <pre><code>:LazyHealth</code></pre>
+        </div>
+        
+        <h2 id="essential-apps">Essential Apps (My Apps)</h2>
+        <div class="content-section">
+            <p>Install apps via <code>yay</code>:</p>
+            <pre><code>yay -S pacseek gnome-calendar gnome-calculator gnome-disks gnome-disks-utility udisks \
+telegram-desktop-bin vesktop-bin obs-studio-bin neovim nwg-look nwg-displays btop mpv vlc</code></pre>
+            
+            <h3>App Details</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>App</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=pacseek">Pacseek</a></td>
+                        <td>Terminal package manager frontend.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=gnome-calendar">GNOME Calendar</a></td>
+                        <td>Track events & appointments.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=gnome-calculator">GNOME Calculator</a></td>
+                        <td>Standard/scientific calculator.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=gnome-disk-utility">GNOME Disks</a></td>
+                        <td>Manage disks & partitions.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=udisks">UDISKS</a></td>
+                        <td>Disk daemon & automount.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://aur.archlinux.org/packages/telegram-desktop-bin/">Telegram</a></td>
+                        <td>Telegram client.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://aur.archlinux.org/packages/vesktop-bin/">Vesktop</a></td>
+                        <td>Minimal Wayland launcher.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=obs-studio">OBS Studio</a></td>
+                        <td>Record & stream video.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=neovim">Neovim</a></td>
+                        <td>Modern Vim fork.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://aur.archlinux.org/packages/nwg-look">nwg-look</a></td>
+                        <td>GTK theme & icon manager.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://aur.archlinux.org/packages/nwg-displays">nwg-displays</a></td>
+                        <td>Wayland display config.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=btop">btop</a></td>
+                        <td>Terminal resource monitor.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=mpv">MPV</a></td>
+                        <td>Command-line media player.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://archlinux.org/packages/?q=vlc">VLC</a></td>
+                        <td>Full-featured media player.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h2 id="setup-complete">Setup Complete</h2>
+        <div class="content-section">
+            <p>Your system is now fully configured with essential tools, apps, and customizations.</p>
+            
+            <p>You now have:</p>
+            <ul>
+                <li>A fully functional Wayland environment (Niri/Hyprland)</li>
+                <li>Development tools and utilities installed and ready</li>
+                <li>Media, productivity, and system management applications available</li>
+                <li>Fonts, scaling, and theme improvements applied</li>
+                <li>Launchers like Walker and customization tools like Spicetify set up</li>
+            </ul>
+            
+            <blockquote><strong>Tip:</strong> Explore each application and tool to optimize it for your workflow. Keep your system updated regularly using <code>sudo pacman -Syu</code> and <code>yay -Syu</code> for AUR packages.</blockquote>
+            
+            <p>System setup is complete. You can now begin using your configured environment efficiently.</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Highlight current section in sidebar
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
