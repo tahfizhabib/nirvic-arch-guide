@@ -1,4 +1,4 @@
-# **Nirvic Arch Guide**
+# **Nirvic Arch Guide (নির্ভিক)**
 
 This guide explains how I install Arch Linux for my daily system. The setup is fully manual for now because I have not finished building my complete dotfiles. I prefer keeping everything manual at this stage so the system stays clean, simple, and easy to adjust later.
 
