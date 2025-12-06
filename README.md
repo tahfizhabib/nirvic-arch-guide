@@ -23,7 +23,7 @@ The goal is to keep the system clean, customizable, and easy to switch between s
 10. [Spicetify](#spicetify-setup-guide)
 11. [Polkit & Drive Access](#polkit-fix--secondary-drive-access)
 12. [Spotify Scaling](#adjust-spotify-scaling-on-linux)
-13. [Hyprland Monitor Setup](#hyprland-monitor-resolution-guide)
+13. [Hyprland Monitor Setup](#hyprland-monitor-resolution-guide) (not related)
 14. [LazyVim](#lazyvim-install-guide)
 15. [Essential Apps](#essential-apps-my-apps)
 16. [Setup Complete](#setup-complete)
